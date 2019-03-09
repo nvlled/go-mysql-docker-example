@@ -1,0 +1,30 @@
+version: '3'
+services:
+    db:
+        build:
+            context: .
+            dockerfile: docker/db/Dockerfile
+        ports:
+            - 3306:3306/tcp
+        expose:
+            - 3306
+        env_file:
+            - .env
+        volumes:
+            - db_data:/var/lib/mysql
+            - ./schema/:/docker-entrypoint-initdb.d/:ro
+    weeb:
+        build:
+            context: .
+            dockerfile: docker/web/Dockerfile
+        ports:
+            - "8080:8080"
+        depends_on: 
+            - db
+        env_file:
+            - .env
+        environment:
+            XY: ${X}@${Y}
+
+volumes:
+    db_data: {}

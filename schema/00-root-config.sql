@@ -1,0 +1,8 @@
+
+CREATE DATABASE IF NOT EXISTS `db`;
+USE `db`;
+
+CREATE TABLE `example`(
+    `id` INT PRIMARY KEY AUTO_INCREMENT,
+    `value` INT
+);
